@@ -43,6 +43,67 @@ app.use(express.json());
 //
 // TODO: Add your routes here and remove the example routes once you know how
 //       everything works.
+app.get("/travel", function (req, res) {
+  db.all(`SELECT * FROM travel`, function (err, rows) {
+    if (err) {
+      // Handle the error
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    // Send the retrieved rows as the response
+    res.json(rows);
+  });
+});
+app.post("/travel", function (req, res) {
+  const { image, place, visited, keywords, description } = req.body;
+  db.run(
+    `INSERT INTO travel (image, place, visited, keywords, description) VALUES (?, ?, ?, ?, ?)`,
+    [image, place, visited, keywords, description],
+    function (err) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ id: this.lastID });
+    }
+  );
+});
+app.get("/travel/:id", function (req, res) {
+  const id = req.params.id;
+  db.get(`SELECT * FROM travel WHERE id = ?`, [id], function (err, row) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json(row);
+  });
+});
+app.put("/travel/:id", function (req, res) {
+  const id = req.params.id;
+  const { image, place, visited, keywords, description } = req.body;
+  db.run(
+    `UPDATE travel SET image = ?, place = ?, visited = ?, keywords = ?, description = ? WHERE id = ?`,
+    [image, place, visited, keywords, description, id],
+    function (err) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+      res.json({ changes: this.changes });
+    }
+  );
+});
+app.delete("/travel/:id", function (req, res) {
+  const id = req.params.id;
+  db.run(`DELETE FROM travel WHERE id = ?`, [id], function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({ changes: this.changes });
+  });
+});
+
 // ###############################################################################
 
 // This example route responds to http://localhost:3000/hello with an example JSON object.
