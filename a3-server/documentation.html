@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<pre>
+    Functionalities:
+        Our API has a database were it is possible to Create, Retrieve, Update and Delete specific items.
+        
+    GET database:
+        End-point: /travel
+        response code:  500 server error
+                        200 OK
+        content-type: application/json
+            Example:    input: http://localhost:3000/travel
+                        output: {
+                                "id": 1,
+                                "place": "Amsterdam",
+                                "visited": "4",
+                                "keywords": "canals, coffee shops, tulips",
+                                "image": "https://i1.pickpik.com/photos/294/94/486/urban-bike-a82f94fdeed9cfbfbd1fd3723e97d2db.jpg",
+                                "description": "Amsterdam was founded at the mouth of the Amstel River, which was dammed to control flooding. Originally a small fishing village in the 12th century, Amsterdam became a major world port during the Dutch Golden Age of the 17th century, when the Netherlands was an economic powerhouse."
+                            }
+    POST add content to database:
+        End-point: /travel
+        response code:  400 All fields are required
+                        500 server error
+                        201 OK
+        content-type: application/json
+            Example:    input: http://localhost:3000/travel/?id=2&place=Rotterdam&visited=3&keywords=Erasmus Bridge&image=https://samples-files.com/samples/images/jpg/1920-1080-sample.jpg&description=A international city
+                        output: {
+                                    "id": 1
+                                }
+                          
+    GET Retrive travel destination:
+        End-point: /travel/:id
+        response code:  404 Not found
+                        500 server error
+                        200 OK
+        content-type: application/json
+            Example:    input: http://localhost:3000/travel/?:id=1
+                        output:  {
+                            "id": 1,
+                            "place": "Amsterdam",
+                            "visited": "4",
+                            "keywords": "canals, coffee shops, tulips",
+                            "image": "https://i1.pickpik.com/photos/294/94/486/urban-bike-a82f94fdeed9cfbfbd1fd3723e97d2db.jpg",
+                            "description": "Amsterdam was founded at the mouth of the Amstel River, which was dammed to control flooding. Originally a small fishing village in the 12th century, Amsterdam became a major world port during the Dutch Golden Age of the 17th century, when the Netherlands was an economic powerhouse."
+                        }
+    PUT update content in database:
+        End-point: /travel/:id
+        response code:  404 Not found
+                        500 server error
+                        200 OK
+        content-type: application/json
+            Example:    input: http://localhost:3000/travel/?:id=1
+                        output: {
+                                    "changes": 1
+                                }
+                          
+    DELETE delete a item
+        End-point: /travel/:id
+        response code:  404 Not found
+                        500 server error
+                        200 Item deleted
+        content-type: application/json
+            Example:    input: http://localhost:3000/travel/?:id=1
+                        output: {
+                                    "message": "Item deleted successfully."
+                                }
+                          
+</pre>
+</html>
