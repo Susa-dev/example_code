@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<pre>
+    Functionalities:
+        Our API has a database were it is possible to Add, Delete and Update specific items
+    GET database:
+        End-point: /travel
+        response code:  500 server error
+                        200 OK
+        content-type: application/json
+    POST add content to database:
+        End-point: /travel
+        response code:  400 All fields are required
+                        500 server error
+                        200 OK
+        content-type: application/json
+    GET Retrive travel destination:
+        End-point: /travel/:id
+        response code:  404 Not found
+                        500 server error
+                        200 OK
+        content-type: application/json
+    PUT update content in database:
+        End-point: /travel/:id
+        response code:  404 Not found
+                        500 server error
+                        200 OK
+        content-type: application/json
+    DELETE delete a item
+        End-point: /travel/:id
+        response code:  404 Not found
+                        500 server error
+                        200 Item deleted
+        content-type: application/json
+</pre>
+</html>
